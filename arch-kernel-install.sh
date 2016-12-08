@@ -24,6 +24,11 @@ if [ `whoami` != 'root' ] ; then
 	exit 1
 fi
 
+if ! zgrep -q CONFIG_KEXEC=y /proc/config.gz ; then
+	echo "kernel has no kexec support. change bootscript to a kernel with kexec support"
+	exit 1
+fi
+
 # lets assume we have a working DHCP lease
 if [ ! -r /run/systemd/netif/leases/2 ] ; then
 	echo "could not get DHCP lease information"
