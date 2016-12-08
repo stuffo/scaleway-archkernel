@@ -10,6 +10,11 @@ This script will allow you to run vanilla Arch kernel on your C1 instance by
 adding the required kernel modules to the Scaleway initrd and kexec'ing into
 the installed Arch kernel. 
 
+Requirments
+-----------
+* A Scaleway C1 instance with Arch Linux
+* Kernel (bootscript) with KEXEC support (for now only 4.5.7-std works)
+
 How it works
 ------------
 1. Install Arch kernel package
@@ -41,3 +46,6 @@ Bugs
 There seems to be a kernel bug in kernel > 4.5 and the kernel will crash 
 on reboots while trying to disconnect nbd devices. You need to do a hard reset
 via the Scaleway GUI when this happens as the system will hang afterwards.
+
+Currently the only working kernel with KEXEC support on Scaleway seems to be
+the default 4.5.7-std-4 kernel. 
