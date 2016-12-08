@@ -12,7 +12,7 @@
 install_kernel="linux-armv7-rc"
 
 # ARCH packages to be installed
-install_packages="tftp-hpa cpio"
+install_packages="tftp-hpa cpio kexec-tools"
 
 if [ `uname -m` != 'armv7l' ] ; then
 	echo "only armv7l supported."
@@ -26,12 +26,6 @@ fi
 
 if ! zgrep -q CONFIG_KEXEC=y /proc/config.gz ; then
 	echo "kernel has no kexec support. change bootscript to a kernel with kexec support"
-	exit 1
-fi
-
-# lets assume we have a working DHCP lease
-if [ ! -r /run/systemd/netif/leases/2 ] ; then
-	echo "could not get DHCP lease information"
 	exit 1
 fi
 
@@ -59,7 +53,7 @@ ARCH_KERNEL_VERSION=`pacman -Q -l $install_kernel |grep '/usr/lib/modules/.*/ker
 echo "ARCH kernel version: $ARCH_KERNEL_VERSION"
 
 # get current TFTP boot server
-TFTP_SERVER=`grep SERVER_ADDRESS /run/systemd/netif/leases/2 | cut -f2 -d=`
+TFTP_SERVER=`grep bootserver /proc/net/pnp | cut -f2 -d" "`
 echo "Scaleway TFTP server: $TFTP_SERVER"
 
 # fetch uboot bootscript
@@ -114,9 +108,9 @@ cd $OLDPWD
 echo "+ cleanup"
 rm -rf uboot.bootscript uboot.bootscript.raw uInitrd.orig uInitrd.orig.gz $INITRD_DIR
 
-# prepare kexec
+# prepare kexec and try to speed up scaleway initrd boot
 echo "+ preparing kexec"
-kexec -l /boot/zImage --initrd=/boot/uInitrd.gz --command-line="`cat /proc/cmdline`"
+kexec -l /boot/zImage --initrd=/boot/uInitrd.gz --command-line="`cat /proc/cmdline` is_in_kexec=yes NO_SIGNAL_STATE=1 DONT_FETCH_KERNEL_MODULES=1"
 
 echo "ready to kexec now. Press any key to reboot into new kernel"
 read anykey
