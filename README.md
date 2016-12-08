@@ -38,7 +38,7 @@ Installation
 Configuration
 -------------
 Edit the script to change default values:
-* install_kernel
+* `install_kernel`
   which Arch kernel package you want to install and run
 
 Bugs
@@ -48,4 +48,6 @@ on reboots while trying to disconnect nbd devices. You need to do a hard reset
 via the Scaleway GUI when this happens as the system will hang afterwards.
 
 Currently the only working kernel with KEXEC support on Scaleway seems to be
-the default 4.5.7-std-4 kernel. 
+the default 4.5.7-std-4 kernel. You can use the Scaleway CLI to reset your
+bootscript to this kernel:
+`scw _patch scw bootscript=599b736c-48b5-4530-9764-f04d06ecadc7`
