@@ -32,7 +32,7 @@ How it works
 Installation
 ------------
 1. clone repo onto your fresh Arch Linux C1 instance
-2. run arch-kernel-install.sh
+2. run `arch-kernel-install.sh`
 3. do what the script tells you
 
 Configuration
@@ -50,4 +50,4 @@ via the Scaleway GUI when this happens as the system will hang afterwards.
 Currently the only working kernel with KEXEC support on Scaleway seems to be
 the default 4.5.7-std-4 kernel. You can use the Scaleway CLI to reset your
 bootscript to this kernel:
-`scw _patch scw bootscript=599b736c-48b5-4530-9764-f04d06ecadc7`
+  `scw _patch <instance> bootscript=599b736c-48b5-4530-9764-f04d06ecadc7`
