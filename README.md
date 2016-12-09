@@ -23,15 +23,19 @@ This project was greatly inspired by:
 ## Installation
 1. make sure your Arch system is up-to-date (`pacman -Syu`)
 2. Install an ARMv7 Arch kernel (eg. `pacman -S linux-armv7`)
-2. clone this (`git clone https://github.com/stuffo/scaleway-arch-kernel-kexec.git`)
-2. run `makepkg` in the repository to create the Arch package
-3. `pacman -U scaleway-archkernel-git*` to install the package
+3. Install this package (pacman -U package)
+   https://github.com/stuffo/scaleway-arch-kernel-kexec/releases/download/v2.0/scaleway-archkernel-git-r14.a0b573e-1-armv7h.pkg.tar.xz
 4. `systemctl enable archkernel-load` to enable the systemd service
 5. `reboot` 
 
 The system will boot and kexec into the Arch Kernel while booting the Arch 
 image. You can see some debug output after bootup using:
 `journalctl -u archkernel-load.service`
+
+## Build
+1. clone this (`git clone https://github.com/stuffo/scaleway-arch-kernel-kexec.git`)
+2. run `makepkg` in the repository to create the Arch package
+3. `pacman -U scaleway-archkernel-git*` to install the package
 
 ## How it works
 1. While booting check if Arch kernel is loaded and matches the initrd.
