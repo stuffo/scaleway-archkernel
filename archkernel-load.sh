@@ -1,6 +1,10 @@
-#!/bin/bash
-
-# XXX: check if kernel changed and rebuild uInitrd
+#!/bin/bash 
+#
+# Rewrite Scaleway initrd and kexec into ARCH kernel
+#
+# Author: stuffo (https://github.com/stuffo/)
+# Location: https://github.com/stuffo/scaleway-arch-kernel-kexec
+#
 
 set -eu
 set -o pipefail
@@ -104,6 +108,10 @@ if [ "$ARCH_KERNEL_VERSION" != "$INITRD_KERNEL_VERSION" ] ; then
     rebuild_initrd
 fi
 
-kexec -l /boot/zImage --initrd=/boot/uInitrd.gz --command-line="$(cat /proc/cmdline) is_in_kexec=yes NO_SIGNAL_STATE=1 DONT_FETCH_KERNEL_MODULES=1 archkernel"
-
-systemctl kexec
+kexec -l /boot/zImage \
+    --initrd=/boot/uInitrd.gz \
+    --command-line="$(cat /proc/cmdline) \
+    is_in_kexec=yes \
+    NO_SIGNAL_STATE=1 \
+    DONT_FETCH_KERNEL_MODULES=1 \
+    archkernel" && systemctl kexec
