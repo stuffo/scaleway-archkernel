@@ -1,5 +1,5 @@
-Rewrite Scaleway initrd and kexec into ARCH kernel 
-==================================================
+Arch Package for running standard Arch Kernels on Scaleway C1 instances
+=======================================================================
 
 Scaleway C1 boots it's root filesystem via NBD so Scaleway came up with a 
 custom kernel that has network and nbd drivers builtin and uses a custom 

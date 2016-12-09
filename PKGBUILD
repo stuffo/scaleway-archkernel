@@ -1,7 +1,7 @@
 # Maintainer: Stuffo <youremail@domain.com>
 pkgname=scaleway-archkernel-git
 _pkgname=scaleway-arch-kernel-kexec
-pkgver=r8.b0d9518
+pkgver=r10.8e316b1
 pkgrel=1
 pkgdesc="boot default Arch kernel on Scaleway C1"
 arch=('armv7h')
@@ -14,6 +14,7 @@ depends=('tftp-hpa'
          'systemd')
 source=("git+https://github.com/stuffo/scaleway-arch-kernel-kexec.git")
 md5sums=(SKIP)
+install=archkernel-load.install
 
 pkgver() {
 	cd "${_pkgname}"
