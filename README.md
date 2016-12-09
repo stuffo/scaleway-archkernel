@@ -10,6 +10,9 @@ This script will allow you to run vanilla Arch kernel on your C1 instance by
 adding the required kernel modules to the Scaleway initrd and kexec'ing into
 the installed Arch kernel. 
 
+The kexec procedure was greatly inspired by:
+`https://github.com/gh2o/digitalocean-debian-to-arch/blob/debian7/install.sh`
+
 Requirments
 -----------
 * A Scaleway C1 instance with Arch Linux
