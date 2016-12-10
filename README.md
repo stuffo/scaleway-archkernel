@@ -1,5 +1,5 @@
-Arch Package for running standard Arch Kernels on Scaleway C1 instances
-=======================================================================
+Run standard Arch Kernels on Scaleway C1 instances
+==================================================
 
 ## Preface
 Scaleway C1 instances have the root filesystem on NBD. Scaleway came up with
@@ -32,7 +32,7 @@ The system will boot and kexec into the Arch Kernel while booting the Arch
 image. You can see some debug output after bootup using:
 `journalctl -u archkernel-load.service`
 
-## Build
+## Building
 1. clone this (`git clone https://github.com/stuffo/scaleway-arch-kernel-kexec.git`)
 2. run `makepkg` in the repository to create the Arch package
 3. `pacman -U scaleway-archkernel-git*` to install the package
@@ -50,6 +50,13 @@ image. You can see some debug output after bootup using:
    Scaleway init script that does the usual Scaleway magic.
 10. Voila! The system is ready now.
 
+## Testing
+| Package          | Version   | working |
+| :--------------- | :-------- | :------ |
+| `linux-armv7`    | 4.8.12-1  | X       |
+| `linux-armv7`    | 4.8.13-1  | X       |
+| `linux-armv7-rc` | 4.9.rc8-1 | X       |
+
 ## Bugs
 There seems to be a kernel bug in kernels > 4.5 and the kernel will crash 
 on reboots while trying to disconnect nbd devices. You need to do a hard reset
@@ -61,3 +68,6 @@ Currently the only working kernel (reboot possible) with KEXEC support on
 Scaleway seems to be the default 4.5.7-std-4 kernel. 
 You can use the Scaleway CLI to reset your bootscript to this kernel:
   `scw _patch <instance> bootscript=599b736c-48b5-4530-9764-f04d06ecadc7`
+
+The mv_xor driver throws some stack traces while booting Arch kernels and fails
+to load but the kernel will run fine without it. 
