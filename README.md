@@ -13,8 +13,8 @@ the original Scaleway initrd on bootup and boot into default Arch kernel.
 All this happens by the magic of kexec which Scaleway supports in recent 
 initrds (aka bootscripts).
 
-This project was greatly inspired by:
-`https://github.com/gh2o/digitalocean-debian-to-arch/blob/debian7/install.sh`
+This project was greatly inspired by:  
+https://github.com/gh2o/digitalocean-debian-to-arch/blob/debian7/install.sh
 
 ## Requirments
 * A Scaleway C1 instance with Arch Linux
@@ -23,8 +23,8 @@ This project was greatly inspired by:
 ## Installation
 1. make sure your Arch system is up-to-date (`pacman -Syu`)
 2. Install an ARMv7 Arch kernel (eg. `pacman -S linux-armv7`)
-3. Install this package (pacman -U package)
-   https://github.com/stuffo/scaleway-arch-kernel-kexec/releases/download/v2.0/scaleway-archkernel-git-r14.a0b573e-1-armv7h.pkg.tar.xz
+3. Install this package  
+   `pacman -U https://github.com/stuffo/scaleway-arch-kernel-kexec/releases/download/v2.1/scaleway-archkernel-git-r17.0c6d00a-1-armv7h.pkg.tar.xz`
 4. `systemctl enable archkernel-load` to enable the systemd service
 5. `reboot` 
 
