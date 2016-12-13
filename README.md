@@ -24,7 +24,7 @@ https://github.com/gh2o/digitalocean-debian-to-arch/blob/debian7/install.sh
 1. make sure your Arch system is up-to-date (`pacman -Syu`)
 2. Install an ARMv7 Arch kernel (eg. `pacman -S linux-armv7`)
 3. Install this package  
-   `pacman -U https://github.com/stuffo/scaleway-arch-kernel-kexec/releases/download/v2.1/scaleway-archkernel-git-r17.0c6d00a-1-armv7h.pkg.tar.xz`
+   `pacman -U https://github.com/stuffo/scaleway-archkernel/releases/download/v2.1/scaleway-archkernel-git-r17.0c6d00a-1-armv7h.pkg.tar.xz`
 4. `systemctl enable archkernel-load` to enable the systemd service
 5. `reboot` 
 
@@ -33,7 +33,7 @@ image. You can see some debug output after bootup using:
 `journalctl -u archkernel-load.service`
 
 ## Building
-1. clone this (`git clone https://github.com/stuffo/scaleway-arch-kernel-kexec.git`)
+1. clone this (`git clone https://github.com/stuffo/scaleway-archkernel.git`)
 2. run `makepkg` in the repository to create the Arch package
 3. `pacman -U scaleway-archkernel-git*` to install the package
 
@@ -54,7 +54,6 @@ image. You can see some debug output after bootup using:
 | Package          | Version   | working |
 | :--------------- | :-------- | :------ |
 | `linux-armv7`    | 4.8.12-1  | X       |
-| `linux-armv7`    | 4.8.13-1  | X       |
 | `linux-armv7-rc` | 4.9.rc8-1 | X       |
 
 ## Bugs
