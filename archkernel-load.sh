@@ -3,7 +3,7 @@
 # Rewrite Scaleway initrd and kexec into ARCH kernel
 #
 # Author: stuffo (https://github.com/stuffo/)
-# Location: https://github.com/stuffo/scaleway-arch-kernel-kexec
+# Location: https://github.com/stuffo/scaleway-archkernel
 #
 
 # kernel modules to add to the Scaleway initrd to allow Arch kernel to mount
