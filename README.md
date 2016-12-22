@@ -16,7 +16,7 @@ initrds (aka bootscripts).
 This project was greatly inspired by:  
 https://github.com/gh2o/digitalocean-debian-to-arch/blob/debian7/install.sh
 
-## Requirments
+## Requirements
 * A Scaleway C1 instance with Arch Linux
 * Kernel (bootscript) with KEXEC support (4.5.7-std-4 only for now, see Bugs below) 
 
@@ -31,6 +31,9 @@ https://github.com/gh2o/digitalocean-debian-to-arch/blob/debian7/install.sh
 The system will boot and kexec into the Arch Kernel while booting the Arch 
 image. You can see some debug output after bootup using:
 `journalctl -u archkernel-load.service`
+
+Frist boot will be taking about 20 seconds longer while regenerating the
+initrd. Subsequent boots with the same Arch kernel will instantly kexec.
 
 ## Building
 1. clone this (`git clone https://github.com/stuffo/scaleway-archkernel.git`)
@@ -55,6 +58,7 @@ image. You can see some debug output after bootup using:
 | :--------------- | :-------- | :------ |
 | `linux-armv7`    | 4.8.12-1  | X       |
 | `linux-armv7-rc` | 4.9.rc8-1 | X       |
+| `linux-armv7`    | 4.9.0-1   | X       |
 
 ## Bugs
 There seems to be a kernel bug in kernels > 4.5 and the kernel will crash 
