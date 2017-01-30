@@ -59,6 +59,7 @@ initrd. Subsequent boots with the same Arch kernel will instantly kexec.
 | `linux-armv7`    | 4.8.12-1  | X       |
 | `linux-armv7-rc` | 4.9.rc8-1 | X       |
 | `linux-armv7`    | 4.9.0-1   | X       |
+| `linux-armv7`    | 4.9.5-1   | X       |
 
 ## Bugs
 There seems to be a kernel bug in kernels > 4.5 and the kernel will crash 
