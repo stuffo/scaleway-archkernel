@@ -46,7 +46,7 @@ rebuild_initrd() {
     fi
     log "Scaleway TFTP server: $tftp_server"
 
-    (cd $workdir && tftp -m binary $tftp_server -c get uboot.bootscript)
+    tftp -m binary $tftp_server -c get uboot.bootscript $workdir/uboot.bootscript
 
     # XXX: maybe one day we can use scw-metadata to do this
     dd if=$workdir/uboot.bootscript of=$workdir/uboot.bootscript.raw ibs=72 skip=1 2> /dev/null
@@ -58,7 +58,7 @@ rebuild_initrd() {
     log "Scaleway initrd: $orig_initrd"
 
     log "+ get scaleway initrd"
-    (cd $workdir && tftp -m binary $tftp_server -c get $orig_initrd $workdir/uInitrd.orig)
+    tftp -m binary $tftp_server -c get $orig_initrd $workdir/uInitrd.orig
     dd if=$workdir/uInitrd.orig of=$workdir/uInitrd.orig.gz ibs=64 skip=1 2> /dev/null
     rm -f $workdir/uInitrd.orig
     log "+ extract scaleway initrd"
