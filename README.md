@@ -60,13 +60,15 @@ initrd. Subsequent boots with the same Arch kernel will instantly kexec.
 | `linux-armv7-rc` | 4.9.rc8-1 | X       |
 | `linux-armv7`    | 4.9.0-1   | X       |
 | `linux-armv7`    | 4.9.5-1   | X       |
+| `linux-armv7`    | 4.9.9-1   | X       |
 
 ## Bugs
 There seems to be a kernel bug in kernels > 4.5 and the kernel will crash 
 on reboots while trying to disconnect nbd devices. You need to do a hard reset
 via the Scaleway GUI when this happens as the system will hang afterwards. This
 is not related to this package, Arch or Scaleway but rather seems to be an
-upstream kernel problem.
+upstream kernel problem. 
+See GitHub issue for any news on this: https://github.com/scaleway/kernel-tools/issues/322
 
 Currently the only working kernel (reboot possible) with KEXEC support on 
 Scaleway seems to be the default 4.5.7-std-4 kernel. 
