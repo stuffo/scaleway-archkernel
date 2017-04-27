@@ -18,7 +18,7 @@ https://github.com/gh2o/digitalocean-debian-to-arch/blob/debian7/install.sh
 
 ## Requirements
 * A Scaleway C1 instance with Arch Linux
-* Kernel (bootscript) with KEXEC support (4.5.7-std-4 only for now, see Bugs below) 
+* Kernel (bootscript) with KEXEC support
 
 ## Installation
 1. make sure your Arch system is up-to-date (`pacman -Syu`)
@@ -61,23 +61,9 @@ initrd. Subsequent boots with the same Arch kernel will instantly kexec.
 | `linux-armv7`    | 4.9.0-1   | X               |
 | `linux-armv7`    | 4.9.5-1   | X               |
 | `linux-armv7`    | 4.9.9-1   | X               |
-| `linux-arvm7`    | 4.10.1-1  | X (recommended) |
+| `linux-arvm7`    | 4.10.1-1  | X               |
+| `linux-arvm7`    | 4.10.10-1 | X (recommended) |
 
 ## Bugs
-There seems to be a kernel bug in kernels between 4.5 and 4.10.1 which will crash 
-on reboots while trying to disconnect nbd devices. You need to do a hard reset
-via the Scaleway GUI when this happens as the system will hang afterwards. This
-is not related to this package, Arch or Scaleway but rather seems to be an
-upstream kernel problem. Make sure to use at least linux-armv7 4.10.1-1 package to 
-avoid this bug.
-
-See GitHub issue for any news on this: https://github.com/scaleway/kernel-tools/issues/322
-
-Currently the only working base kernel (reboot possible) with KEXEC support on 
-Scaleway seems to be the default 4.5.7-std-4 kernel. Make sure your Scaleway 
-bootscript points to this kernel.
-You can use the Scaleway CLI to reset your bootscript to this kernel:
-  `scw _patch <instance> bootscript=599b736c-48b5-4530-9764-f04d06ecadc7`
-
-The mv_xor driver throws some stack traces while booting Arch kernels and fails
-to load but the kernel will run fine without it. 
+The mv_xor module throws some stack traces while booting and fails to load but the 
+kernel will run fine without it.
