@@ -62,8 +62,16 @@ initrd. Subsequent boots with the same Arch kernel will instantly kexec.
 | `linux-armv7`    | 4.9.5-1   | X               |
 | `linux-armv7`    | 4.9.9-1   | X               |
 | `linux-arvm7`    | 4.10.1-1  | X               |
-| `linux-arvm7`    | 4.10.10-1 | X (recommended) |
+| `linux-arvm7`    | 4.10.10-1 | X               |
+| `linux-arvm7`    | 4.14.15-1 | X               |
+
 
 ## Bugs
 The mv_xor module throws some stack traces while booting and fails to load but the 
 kernel will run fine without it.
+
+On some kernels shutdown/reboot fails because of wired timing issues with nbd and 
+network shutdown related to systemd. Never really got to find out what the problem
+is as it is painfull to debug with the 9600 console scaleway has on C1 instances. 
+If your instance get stuck on reboot/shutdown, just issue a hard reset via web or 
+command line client.
