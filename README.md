@@ -35,6 +35,19 @@ image. You can see some debug output after bootup using:
 Frist boot will be taking about 20 seconds longer while regenerating the
 initrd. Subsequent boots with the same Arch kernel will instantly kexec.
 
+## Troubleshooting
+If your initrd or kernel is bad you can get stuck with a non booting system.
+Add a server tag in the Scaleway webui with the name `archkernel_disabled`
+and kexec won't be executed on bootup anymore.  
+
+Other usefull Scaleway related tags are `INITRD_POST_SHELL=1` which will drop 
+you in a shell after the whole initrd shebang is done so you can tinker with 
+your filesystem. Also consider `INITRD_VERBOSE=1` to make initrd more verbose.
+`INITRD_DEBUG=1` is maximum verbose and will trace all commands that get 
+executed in initrd.
+
+You can always run archkernel-load.sh manually to start the kexec process.
+
 ## Building
 1. clone this (`git clone https://github.com/stuffo/scaleway-archkernel.git`)
 2. run `makepkg` in the repository to create the Arch package
@@ -75,3 +88,12 @@ network shutdown related to systemd. Never really got to find out what the probl
 is as it is painfull to debug with the 9600 console scaleway has on C1 instances. 
 If your instance get stuck on reboot/shutdown, just issue a hard reset via web or 
 command line client.
+
+Kexec itself seems to fail sporadically on this ARM platform. You will see the 
+last words "kexec_core: loading new kernel" and than nothing will ever happen. 
+I suspect unclean device shutdown issues (maybe KEXEC_HARDBOOT would fix it?).
+Just hard reset your instance and try again. 
+
+I am open to suggestions and pull request on how to fix this issues as Scaleway
+doesn't seem to be very interested in fixing any C1 instance related issues. I
+guess its on the way to retirement. :(
