@@ -6,9 +6,10 @@
 # Location: https://github.com/stuffo/scaleway-archkernel
 #
 
-# kernel modules to add to the Scaleway initrd to allow Arch kernel to mount
-# nbd devices. Path prefix is /lib/modules/<kernel version>
-REQUIRED_MODULES="net/ethernet/marvell/mvneta_bm net/ethernet/marvell/mvneta block/nbd"
+# kernel modules to add to the Scaleway initrd to enable Arch kernel network 
+# and to mount nbd devices. If module is missing, we skip it as it may be a 
+# kernel that does not require it. Path prefix is /lib/modules/<kernel version>
+REQUIRED_MODULES="net/phy/phylink net/ethernet/marvell/mvneta_bm net/ethernet/marvell/mvneta block/nbd"
 
 # where to account current Arch kernel version
 ARCH_KERNEL_STAMP="/boot/.archkernel-version"
@@ -72,10 +73,14 @@ rebuild_initrd() {
     local initrd_mod_dir="$initrd_dir/lib/modules/$ARCH_KERNEL_VERSION"
     mkdir -p $initrd_mod_dir
     for mod in $REQUIRED_MODULES ; do
-        log "+ add module $mod to initrd"
-        modname=$(basename $mod).ko
-        gunzip < /lib/modules/$ARCH_KERNEL_VERSION/kernel/drivers/$mod.ko.gz > $initrd_mod_dir/$modname
-        insmod_command=$insmod_command"insmod /lib/modules/$ARCH_KERNEL_VERSION/$modname\n"
+        if [ -e /lib/modules/$ARCH_KERNEL_VERSION/kernel/drivers/$mod.ko.gz ] ; then
+            log "+ add module $mod to initrd"
+            modname=$(basename $mod).ko
+            gunzip < /lib/modules/$ARCH_KERNEL_VERSION/kernel/drivers/$mod.ko.gz > $initrd_mod_dir/$modname
+            insmod_command=$insmod_command"insmod /lib/modules/$ARCH_KERNEL_VERSION/$modname\n"
+        else
+            log "+ skipping module $mod for initrd. not found."
+        fi
     done
 
     log "+ prepend loading modules before entering scaleway initrd"
