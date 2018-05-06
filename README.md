@@ -97,3 +97,13 @@ Just hard reset your instance and try again.
 I am open to suggestions and pull request on how to fix this issues as Scaleway
 doesn't seem to be very interested in fixing any C1 instance related issues. I
 guess its on the way to retirement. :(
+
+## My Advise on C1 instances
+Forget about C1 instances. They have painfully slow console, the CPU is slow, the 
+scaleway initrd system sucks and you need tools like this to get your own kernels
+going. A healthy reboot results in a kernel panic with most newer kernels. 
+All my (growing) pains with the C1 came to an end when the START1 instances came out.
+This instances work like any other virtual machine and boot the local kernel without
+scaleway initrd hokus pokus. Ok, its not bare metal and is not ARM anymore, but its
+faster and costs nearly the same and I don't have to kexec my way out of hell.
+
